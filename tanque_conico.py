@@ -11,18 +11,23 @@ alfa = (R1 - R0)/h
 def server_opcua():
     # # Criando o servidor OPC UA
     server = Server()
+
     # Definindo o endpoint do servidor
     url = "opc.tcp://localhost:4840"
     server.set_endpoint(url)
+
     # Definindo o nome do namespace
     namespace = server.register_namespace("MyNamespace")
+
     # Criando o objeto de nó raiz
-    root_node = server.get_root_node()
+    root_node = server.get_objects_node()
     obj = root_node.add_object(namespace, "MyObject")
+
     # Adicionando uma variável ao objeto
     var = obj.add_variable(namespace, "MyVariable", 0)
     var.set_writable()  # Permitir escrita na variável
-    # # Inicializando o servidor
+
+    #Inicializando o servidor
     server.start()
     print("Servidor OPC UA iniciado. Aguardando conexões...")
     # Mantendo o servidor em execução
