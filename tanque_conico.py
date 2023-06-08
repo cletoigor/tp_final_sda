@@ -76,6 +76,8 @@ def runge_kutta(qin,duration):
         print(round(h_values[-1],2))
         return round(h_values[-1],2)
 
-var = server_opcua()
+var_value = server_opcua()
 print("valor da variavel atualizada")
-#runge_kutta(20.0,100)  
+print(var_value)
+
+runge_kutta(var_value,100)
