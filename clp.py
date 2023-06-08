@@ -54,7 +54,7 @@ def client_opcua(qin):
         print("Conexão estabelecida com o servidor OPC UA.")
         var_node = client.get_node("ns=2;i=2")  # Substitua pelo NodeID da variável desejada
 
-        new_value = qin  # Substitua pelo valor que você deseja escrever
+        new_value = qin
 
         var_node.set_value(new_value)
         print("Valor da variável qin atualizado para: ", new_value)

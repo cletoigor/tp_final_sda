@@ -37,7 +37,9 @@ def server_opcua():
     except KeyboardInterrupt:
         # Encerrando o servidor quando o usuário pressionar Ctrl+C
         server.stop()
-    return var
+    server_node = server.get_node("ns=1;i=2")
+    var_value = server_node.get_value()
+    return var_value
 
 def runge_kutta(qin,duration):
 
@@ -76,5 +78,4 @@ def runge_kutta(qin,duration):
 
 var = server_opcua()
 print("valor da variavel atualizada")
-print(var)
-#runge_kutta(20.0,100)
+#runge_kutta(20.0,100)  
