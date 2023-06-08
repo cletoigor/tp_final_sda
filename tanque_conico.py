@@ -23,9 +23,16 @@ def server_opcua():
     var = obj.add_variable(namespace, "MyVariable", 0)
     var.set_writable()  # Permitir escrita na variável
     # # Inicializando o servidor
-    # server.start()
-    # print("Servidor OPC UA iniciado. Aguardando conexões...")
-    server.stop()
+    server.start()
+    print("Servidor OPC UA iniciado. Aguardando conexões...")
+    # Mantendo o servidor em execução
+    try:
+        while True:
+            pass
+    except KeyboardInterrupt:
+        # Encerrando o servidor quando o usuário pressionar Ctrl+C
+        server.stop()
+    return var
 
 def runge_kutta(qin,duration):
 
@@ -62,5 +69,6 @@ def runge_kutta(qin,duration):
         print(round(h_values[-1],2))
         return round(h_values[-1],2)
 
-server_opcua()
+var = server_opcua()
+print(var)
 #runge_kutta(20.0,100)

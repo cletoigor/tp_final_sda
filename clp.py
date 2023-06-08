@@ -52,12 +52,12 @@ def client_opcua(qin):
         # Conectar ao servidor OPC UA
         client.connect()
         print("Conexão estabelecida com o servidor OPC UA.")
-        #var_node = client.get_node("ns=2;i=1")  # Substitua pelo NodeID da variável desejada
+        var_node = client.get_node("ns=2;i=1")  # Substitua pelo NodeID da variável desejada
 
-        #new_value = qin  # Substitua pelo valor que você deseja escrever
+        new_value = qin  # Substitua pelo valor que você deseja escrever
 
-        #var_node.set_value(new_value)
-        #print("Valor da variável qin atualizado para: ", new_value)
+        var_node.set_value(new_value)
+        print("Valor da variável qin atualizado para: ", new_value)
 
     finally:
         # Desconectar do servidor OPC UA
