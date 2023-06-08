@@ -37,7 +37,7 @@ def server_opcua():
     except KeyboardInterrupt:
         # Encerrando o servidor quando o usuário pressionar Ctrl+C
         server.stop()
-    server_node = server.get_node("ns=1;i=2")
+    server_node = server.get_node("ns=2;i=2")
     var_value = server_node.get_value()
     return var_value
 
