@@ -1,4 +1,5 @@
 import numpy as np
+from opcua import ua, uamethod, Server
 
 cv = 0.6
 h = 3000.0
@@ -6,6 +7,32 @@ h_t = 0
 R0 = 1
 R1 = 10
 alfa = (R1 - R0)/h
+
+def server_opcua():
+    # # Criando o servidor OPC UA
+    server = Server()
+    # Definindo o endpoint do servidor
+    url = "opc.tcp://localhost:4840"
+    server.set_endpoint(url)
+    # Definindo o nome do namespace
+    namespace = server.register_namespace("MyNamespace")
+    # Criando o objeto de nó raiz
+    root_node = server.get_root_node()
+    obj = root_node.add_object(namespace, "MyObject")
+    # Adicionando uma variável ao objeto
+    var = obj.add_variable(namespace, "MyVariable", 0)
+    var.set_writable()  # Permitir escrita na variável
+    # # Inicializando o servidor
+    server.start()
+    print("Servidor OPC UA iniciado. Aguardando conexões...")
+    # Mantendo o servidor em execução
+    try:
+        while True:
+            pass
+    except KeyboardInterrupt:
+        # Encerrando o servidor quando o usuário pressionar Ctrl+C
+        server.stop()
+    return var
 
 def runge_kutta(qin,duration):
 
@@ -42,4 +69,6 @@ def runge_kutta(qin,duration):
         print(round(h_values[-1],2))
         return round(h_values[-1],2)
 
-runge_kutta(20.0,100)
+var = server_opcua()
+print(var)
+#runge_kutta(20.0,100)
